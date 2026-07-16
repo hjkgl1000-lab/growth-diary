@@ -125,6 +125,13 @@ body {
 .card.theme-white { outline: 2px solid var(--white-theme-border); }
 .card.theme-black { outline: 2px solid var(--black-theme); }
 
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .card-tag {
   display: inline-flex;
   align-items: center;
@@ -137,6 +144,16 @@ body {
 .card-tag.theme-white { background: #fff; color: #333; border: 1px solid var(--white-theme-border); }
 .card-tag.theme-black { background: #1a1a1a; color: #fff; }
 .card-age { font-size: 11px; opacity: 0.7; margin-left: 6px; font-weight: 400; }
+
+.card-delete {
+  border: none;
+  background: none;
+  color: #bbb;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.card-delete:hover { color: #d33; }
 
 .card-photos {
   display: flex;

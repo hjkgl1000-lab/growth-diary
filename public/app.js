@@ -128,6 +128,9 @@ function renderTimeline(records) {
     const card = document.createElement('div');
     card.className = `card theme-${theme}`;
 
+    const cardTop = document.createElement('div');
+    cardTop.className = 'card-top';
+
     const tag = document.createElement('span');
     tag.className = `card-tag theme-${theme}`;
     tag.textContent = child ? child.name : '아이';
@@ -137,7 +140,21 @@ function renderTimeline(records) {
       ageSpan.textContent = computeAge(child.birthdate);
       tag.appendChild(ageSpan);
     }
-    card.appendChild(tag);
+    cardTop.appendChild(tag);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.type = 'button';
+    deleteBtn.className = 'card-delete';
+    deleteBtn.textContent = '삭제';
+    deleteBtn.onclick = async () => {
+      if (!confirm('이 기록을 삭제할까요?')) return;
+      await api(`/api/records/${r.id}`, { method: 'DELETE' });
+      showToast('삭제했어요');
+      await loadRecords();
+    };
+    cardTop.appendChild(deleteBtn);
+
+    card.appendChild(cardTop);
 
     if (r.photos && r.photos.length) {
       const photosWrap = document.createElement('div');
@@ -148,6 +165,7 @@ function renderTimeline(records) {
         const img = document.createElement('img');
         img.src = p.url;
         img.loading = 'lazy';
+        img.onerror = () => console.error('사진을 불러오지 못했어요:', p.url);
         const flatIndex = flatPhotos.length;
         flatPhotos.push(p.url);
         img.onclick = () => openLightbox(flatIndex);
