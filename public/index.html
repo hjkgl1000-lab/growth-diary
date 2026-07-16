@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>우리 아이 성장일기</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <h1>👶 우리 아이 성장일기</h1>
+    <p>가족 비밀번호를 입력해주세요</p>
+    <input type="password" id="pwInput" placeholder="비밀번호">
+    <button id="pwSubmit">들어가기</button>
+    <p id="pwError" class="error-text"></p>
+  </div>
+</div>
+
+<div id="app" class="app hidden">
+  <header class="app-header">
+    <div class="header-row">
+      <h1>우리 아이 성장일기</h1>
+      <button id="settingsBtn" class="icon-btn" title="아이 정보 설정">⚙️</button>
+    </div>
+    <div class="tabs" id="tabs"></div>
+  </header>
+
+  <main id="timeline" class="timeline"></main>
+
+  <button id="addBtn" class="fab">+</button>
+</div>
+
+<!-- 기록 추가 -->
+<div id="addModal" class="modal hidden">
+  <div class="modal-card">
+    <h2>기록 추가</h2>
+    <form id="addForm">
+      <label>아이</label>
+      <div class="child-picker" id="childPicker"></div>
+
+      <label>날짜</label>
+      <input type="date" id="recordDate" required>
+
+      <label>짧은 기록</label>
+      <textarea id="recordContent" placeholder="오늘 있었던 일을 적어주세요" maxlength="500"></textarea>
+
+      <label>작성자 (선택)</label>
+      <input type="text" id="recordAuthor" placeholder="예: 엄마, 이모">
+
+      <label>사진 (여러 장 선택 가능)</label>
+      <input type="file" id="recordPhotos" accept="image/*" multiple>
+
+      <div class="modal-actions">
+        <button type="button" id="cancelAdd">취소</button>
+        <button type="submit" id="submitAdd">저장</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 아이 정보 설정 -->
+<div id="settingsModal" class="modal hidden">
+  <div class="modal-card">
+    <h2>아이 정보 설정</h2>
+    <div id="childList"></div>
+    <button type="button" id="addChildBtn" class="secondary-btn">+ 아이 추가</button>
+    <div class="modal-actions">
+      <button type="button" id="closeSettings">닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 사진 확대보기 -->
+<div id="lightbox" class="lightbox hidden">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev">‹</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext">›</button>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
